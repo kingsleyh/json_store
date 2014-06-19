@@ -26,6 +26,7 @@ Gem::Specification.new do |s|
     "README.md",
     "Rakefile",
     "VERSION",
+    "json_store.gemspec",
     "lib/json_store.rb"
   ]
   s.homepage = "http://github.com/kingsleyh/json_store"
