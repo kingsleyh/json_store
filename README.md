@@ -1,8 +1,8 @@
-= json_store
+# json_store
 
 Very simple key/value in memory database using json
 
-== Usage
+## Usage
 
 ```ruby
 db = JsonStore.new('names.db')
@@ -31,7 +31,7 @@ one will be created.
 * When you want to add to the db - you use set(key,value)
 * When you want to push your data to file there are a couple of options - push or merge then push
 
-== Merge and Push
+## Merge and Push
 
 calling push will replace the db on file with the current content of the local map. Calling merge will merge the file db with the current in memory map after which you can call push
 to store the data. If you are happy to replace the db file with the content of your local map just use push. If you think there might be changes to the db file that you want before
@@ -46,7 +46,7 @@ Merge has 2 possibilities - :into_local and :into_remote - the default is :into_
 * :into_local will read the file content and then merge it into the local map - overwriting local changes with ones from file where the key is the same
 * :into_remote will read the local map into the data from file - thus keeping any local changes and overwriting file items where the key is the same
 
-== Get and Search
+## Get and Search
 
 There are 2 ways to find data:
 
@@ -78,7 +78,7 @@ Search takes 2 parameters:  the selector and a match kind - which is set to :mat
 * :test - returns true or false if there is a match
 
 
-== Contributing to json_store
+## Contributing to json_store
  
 * Check out the latest master to make sure the feature hasn't been implemented or the bug hasn't been fixed yet.
 * Check out the issue tracker to make sure someone already hasn't requested it and/or contributed it.
@@ -88,7 +88,7 @@ Search takes 2 parameters:  the selector and a match kind - which is set to :mat
 * Make sure to add tests for it. This is important so I don't break it in a future version unintentionally.
 * Please try not to mess with the Rakefile, version, or history. If you want to have your own version, or is otherwise necessary, that is fine, but please isolate to its own commit so I can cherry-pick around it.
 
-== Copyright
+## Copyright
 
 Copyright (c) 2014 Kingsley Hendrickse. See LICENSE.txt for
 further details.
