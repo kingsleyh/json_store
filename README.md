@@ -21,6 +21,35 @@ db.merge
 db.push
 ```
 
+* Peristing more complex things like custom objects
+
+```ruby
+
+class Person
+
+  def initialize(first,last)
+    @first = first
+    @last = last
+  end
+
+  def first
+    @first
+  end
+
+  def last
+    @last
+  end
+
+end
+
+db = JsonStore.new('people')
+db.pull
+db.set(:person,Person.new('Kingsley','Hendrickse'))
+db.push
+p db.get(:person).first # Kingsley
+
+```
+
 There are only a handful of commands:
 
 * pull
