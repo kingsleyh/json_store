@@ -2,9 +2,17 @@
 
 Very simple key/value in memory database using json
 
+## Install
+
+```ruby
+gem install json_store
+```
+
 ## Usage
 
 ```ruby
+require 'json_store'
+
 db = JsonStore.new('names.db')
 db.pull
 db.set(:name,'Kingsley')
