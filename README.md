@@ -65,7 +65,7 @@ Search uses the json select gem (https://github.com/fd/json_select) and (http://
 Read the documentation in the links above for a better idea how to use it - here is a simple example:
 
 ```ruby
-  db.set(:names,[{id:1,name:'Kingsley'},{id:2},name:'Kostas'])
+  db.set(:names,[{id:1,name:'Kingsley'},{id:2,name:'Kostas'}])
   db.search('.names .name') # ['Kingsley','Kostas']
   db.search('.names .name',:match) # "Kingsley"
   db.search('.names object:last-child .name',:match) # "Kostas"
