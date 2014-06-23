@@ -16,7 +16,7 @@ require 'json_store'
 db = JsonStore.new('names.db')
 db.pull
 db.set(:name,'Kingsley')
-p db.get(:name)
+p db.get(:name # Kingsley)
 db.merge
 db.push
 ```
