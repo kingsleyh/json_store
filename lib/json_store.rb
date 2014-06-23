@@ -21,12 +21,16 @@ class JsonStore
     @map
   end
 
+  def clear
+    @map = {}
+  end
+
   def all_as_json
     Oj.dump(@map)
   end
 
-  def search(selector,kind=:matches)
-    JSONSelect(selector).send(kind,@map)
+  def search(selector, kind=:matches)
+    JSONSelect(selector).send(kind, @map)
   end
 
   def get_as_json(key)
@@ -35,7 +39,7 @@ class JsonStore
 
   def pull
     begin
-      @map = read
+      @map = read_data
     rescue LockMethod::Locked
       sleep 0.5
       pull
@@ -44,7 +48,7 @@ class JsonStore
 
   def push
     begin
-      write
+      write_data
     rescue LockMethod::Locked
       sleep 0.5
       push
@@ -53,20 +57,24 @@ class JsonStore
 
   def merge(direction=:into_remote)
     begin
-      direction == :into_local ? @map.merge!(read) : read.merge!(@map)
+      @map = direction == :into_local ? @map.merge(read_data) : read_data.merge(@map)
     rescue LockMethod::Locked
       sleep 0.5
       merge(direction)
     end
   end
 
-  def as_lock
-    'json_store'
+  def db_path
+    @db
   end
 
   private
 
-  def read
+  def as_lock
+    'json_store'
+  end
+
+  def read_data
     data = {}
     if File.exists?(@db)
       f = File.read(@db)
@@ -75,16 +83,15 @@ class JsonStore
     data
   end
 
-  lock_method :read
+  lock_method :read_data
 
-  def write
-    File.open(@db, 'w') { |f| f.write(Oj.dump(@map)) }
+  def write_data
+    f = File.new(@db, 'w')
+    f.write(Oj.dump(@map))
+    f.close
   end
 
-  lock_method :write
+  lock_method :write_data
 
-  def keep_trying
-
-  end
 
 end
