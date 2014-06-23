@@ -102,29 +102,29 @@ describe JsonStore do
     expect(db.all).to eq(name: 'Kingsley', date: {day: 'Mon', year: '2014'}, slot: 'PM')
   end
 
-  #it 'should lock to prevent concurrent access' do
-  #  t1 = Thread.new {
-  #    20.times{
-  #    db = create_new_db('test3.json')
-  #    db.set(:slot, "1_PM")
-  #    db.merge
-  #    db.push
-  #    }
-  #  }
-  #  t2 = Thread.new {
-  #    20.times {
-  #    db = create_new_db('test3.json')
-  #    db.set(:slot, "2_PM")
-  #    db.merge
-  #    db.push
-  #    }
-  #  }
-  #  t2.join
-  #  t1.join
-  #  db2 = JsonStore.new(File.dirname(__FILE__) + '/test_data/test3.json')
-  #  db2.pull
-  #  expect(db2.get(:slot)).to match(/PM/)
-  #end
+  it 'should lock to prevent concurrent access' do
+    t1 = Thread.new {
+      20.times{
+      db = create_new_db('test3.json')
+      db.set(:slot, "1_PM")
+      db.merge
+      db.push
+      }
+    }
+    t2 = Thread.new {
+      20.times {
+      db = create_new_db('test3.json')
+      db.set(:slot, "2_PM")
+      db.merge
+      db.push
+      }
+    }
+    t2.join
+    t1.join
+    db2 = JsonStore.new(File.dirname(__FILE__) + '/test_data/test3.json')
+    db2.pull
+    expect(db2.get(:slot)).to match(/PM/)
+  end
 
   it 'should set oj json parser default options' do
     db = JsonStore.new('test')
