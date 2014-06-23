@@ -66,6 +66,9 @@ There are only a handful of commands:
 * search
 * all
 * all_as_json
+* clear
+* set_json_opts
+* get_json_opts
 
 The basic concept is that you create new db with the JsonStore.new and if the db is already a valid json file you can do pull to populate the in memory map. If no file exists then
 one will be created.
@@ -119,6 +122,36 @@ Search takes 2 parameters:  the selector and a match kind - which is set to :mat
 * :match - returns only the first match
 * :test - returns true or false if there is a match
 
+## Persisting Objects
+
+When persisting objects - such as the Person class mentioned earlier - the default method of serialization used by Oj is :object. Which means it will expand the object into json format with an entry
+containg an O to denote it's an object. Oj has several other notations for Array etc.
+
+But if you want to have nicer json so you can use it elsewhere as a feed for example - you might prefer to use the :compat mode which looks for a to_json method on the object and uses that
+to serialize it. So you can add your own to_json method. Here is an example:
+
+```ruby
+class Car
+
+  attr_reader :doors,:wheels
+
+  def initialize(doors,wheels)
+   @doors = doors
+   @wheels = wheels
+  end
+
+  def to_json
+    puts %Q{ { "doors":#{@doors},"wheels",#{@wheels}} }
+  end
+
+end
+
+db = JsonStore.new('cars')
+db.set_json_opts(mode: :compat,indent: 2)
+db.set(:cars,[Car.new(4,4),Car.new(2,3])
+p db.all_as_json
+
+```
 
 ## Contributing to json_store
  

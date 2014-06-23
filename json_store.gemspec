@@ -19,19 +19,7 @@ Gem::Specification.new do |s|
     "README.md"
   ]
   s.files = [
-    ".document",
-    ".travis.yml",
-    "Gemfile",
-    "LICENSE.txt",
-    "README.md",
-    "Rakefile",
-    "VERSION",
-    "json_store.gemspec",
     "lib/json_store.rb",
-    "spec/json_store_spec.rb",
-    "spec/test_data/test1.json",
-    "spec/test_data/test2.json",
-    "spec/test_data/test3.json"
   ]
   s.homepage = "http://github.com/kingsleyh/json_store"
   s.licenses = ["MIT"]
