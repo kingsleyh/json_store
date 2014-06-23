@@ -7,6 +7,7 @@ class JsonStore
   def initialize(db)
     @db = db
     @map = {}
+    @json_opts = Oj.default_options
   end
 
   def set(key, value)
@@ -21,12 +22,20 @@ class JsonStore
     @map
   end
 
+  def set_json_opts(options)
+   @json_opts.merge!(options)
+  end
+
+  def get_json_opts
+    @json_opts
+  end
+
   def clear
     @map = {}
   end
 
   def all_as_json
-    Oj.dump(@map)
+    Oj.dump(@map,@json_opts)
   end
 
   def search(selector, kind=:matches)
@@ -34,7 +43,7 @@ class JsonStore
   end
 
   def get_as_json(key)
-    Oj.dump(@map[key])
+    Oj.dump(@map[key],@json_opts)
   end
 
   def pull
@@ -87,7 +96,7 @@ class JsonStore
 
   def write_data
     f = File.new(@db, 'w')
-    f.write(Oj.dump(@map))
+    f.write(Oj.dump(@map,@json_opts))
     f.close
   end
 
