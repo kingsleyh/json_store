@@ -23,6 +23,7 @@ Jeweler::Tasks.new do |gem|
   gem.authors = ["Kingsley Hendrickse"]
   # dependencies defined in Gemfile
 end
+task :default => :spec
 Jeweler::RubygemsDotOrgTasks.new
 
 
