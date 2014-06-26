@@ -2,7 +2,7 @@
 
 [![Build Status](https://travis-ci.org/kingsleyh/json_store.svg?branch=master)](https://travis-ci.org/kingsleyh/json_store)
 [![Gem Version](https://badge.fury.io/rb/json_store.svg)](http://badge.fury.io/rb/json_store)
-[![json_store Downloads](http://www.gemetric.me/images/json_store.gif)](https://rubygems.org/gems/json_store)
+[![json_store downloads](http://www.gemetric.me/images/json_store.gif?1)](https://rubygems.org/gems/json_store)
 
 
 Very simple key/value in memory database using json
