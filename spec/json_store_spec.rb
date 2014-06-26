@@ -132,6 +132,12 @@ describe JsonStore do
     expect(db.get_json_opts[:mode]).to eq(:compat)
   end
 
+  it 'should set the map directly with json' do
+    db = JsonStore.new('test')
+    db.set_json('{"name":{"first":"Kingsley"}}')
+    expect(db.get('name')).to eq({'first' =>'Kingsley'})
+  end
+
   private
 
   def create_new_db(path, content={name: 'Kingsley'})
