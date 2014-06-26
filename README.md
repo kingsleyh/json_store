@@ -105,7 +105,8 @@ Get just finds a value by key e.g.
    db.get(:name) # Kingsley
 ```
 
-Search uses the json select gem (https://github.com/fd/json_select) and (http://jsonselect.org/#overview) to provide advanced searching capability.
+Search uses the json select gem (https://github.com/fd/json_select) and (http://jsonselect.org/#overview) to provide advanced searching capability. If you persist custom ruby objects however this
+searching method will not work as it will only work with the standard json types. But then you can just use regular ruby to find things e.g. take, select, reject, find. sort_by etc
 
 Read the documentation in the links above for a better idea how to use it - here is a simple example:
 
@@ -128,7 +129,9 @@ When persisting objects - such as the Person class mentioned earlier - the defau
 containg an O to denote it's an object. Oj has several other notations for Array etc.
 
 But if you want to have nicer json so you can use it elsewhere as a feed for example - you might prefer to use the :compat mode which looks for a to_json method on the object and uses that
-to serialize it. So you can add your own to_json method. Here is an example:
+to serialize it. So you can add your own to_json method. Please note that when retrieving data again it will be as hash/array data not the ruby custom object initially created -
+because the :compat mode will force serialization to be the standard supported json - e.g. hash/arrays. If you want to persist objects and retrieve them then stick with the default
+serialization. Here is an example of using compat:
 
 ```ruby
 class Car
