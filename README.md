@@ -24,6 +24,11 @@ db.set(:name,'Kingsley')
 p db.get(:name # Kingsley)
 db.merge
 db.push
+
+# if removing items use write instead of merge and push
+db.pull
+db.remove(:name)
+db.write # write replaces file with in memory data
 ```
 
 * Peristing more complex things like custom objects
