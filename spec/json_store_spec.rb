@@ -34,6 +34,24 @@ describe JsonStore do
     expect(db.all).to eq({name: 'Kostas', slot: 'PM'})
   end
 
+  it 'should remove data' do
+    db = create_new_db('test2.json')
+    expect(db.all).to eq({name: 'Kingsley'})
+    db.remove(:name)
+    db.write
+    expect(db.all).to eq({})
+  end
+
+  it 'should write data' do
+    db = create_new_db('test2.json')
+    expect(db.all).to eq({name: 'Kingsley'})
+    db.set(:name,'kings')
+    db.set(:slot,'PM')
+    db.write
+    db.pull
+    expect(db.all).to eq({name:'kings',slot:'PM'})
+  end
+
   it 'should merge file changes into memory map on merge into_local' do
     db = create_new_db('test2.json')
     expect(db.all).to eq({name: 'Kingsley'})

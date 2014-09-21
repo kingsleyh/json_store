@@ -29,6 +29,17 @@ class JsonStore
     @map[key]
   end
 
+  # Removes the data from memory map by key
+  # e.g. db.remove('name')
+  def remove(key)
+   @map.delete(key)
+  end
+
+  # Writes the in memory data to file by replacing file
+  def write
+   write_data
+  end
+
   # Returns the whole memory map
   def all
     @map
@@ -49,7 +60,7 @@ class JsonStore
     @json_opts
   end
 
-  #ÊClears the memory map
+  #ï¿½Clears the memory map
   def clear
     @map = {}
   end
