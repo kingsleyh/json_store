@@ -1,3 +1,5 @@
+# PLEASE NOTE - This project is not being actively maintained at the moment - I am taking a break - not sure when I will return.
+
 # json_store
 
 [![Build Status](https://travis-ci.org/kingsleyh/json_store.svg?branch=master)](https://travis-ci.org/kingsleyh/json_store)
